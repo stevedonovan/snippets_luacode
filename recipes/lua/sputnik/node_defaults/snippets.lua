@@ -41,25 +41,24 @@ NODE.template_helpers = {
 
 -- (SJD) this conditional macro which is user-aware is borked on Kaio, but works fine on CVS version
 ---$has_node_permissions{$new_id, "edit"}[[<p><a href="$new_url">_(ADD_NEW_LUA_SNIPPET)</a></p>]],[[<p><a href="$make_url{"sputnik/login", next = $id}">_(LOGIN)</a> to create a snippet</p>]]
-
 NODE.html_content = [=[
 $markup{$content}
 
-<h2><a href="$new_url">_(ADD_NEW_LUA_SNIPPET)</a></h2>
+<h3><a href="$new_url">_(ADD_NEW_LUA_SNIPPET)</a></h3>
 
 <table class="sortable" width="100%">
  <thead>
   <tr>
-   <th>#</th>
    <th>Title</th>
+   <th>#</th>
    <th>Author</th>
    <th>Added</th>
   </tr>
  </thead>
  $do_nodes[[
  <tr>
-  <td>$uid{$id}</td>
   <td><a href="$url">$title</a></td>
+  <td>$uid{$id}</td>
   <td>$author</td>
   <td>$format_time{$creation_time, "%d %b %Y"}</td>
  </tr>

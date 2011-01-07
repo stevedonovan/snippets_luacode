@@ -6,6 +6,8 @@ local util = require("sputnik.util")
 local recipes = require("sputnik.recipes")
 local parser = require("sputnik.recipes.parser")
 local hook = require("sputnik.hooks.snippets")
+
+local make_lua_pretty = parser.make_lua_pretty
 local append = table.insert
 local empty = recipes.empty
 
@@ -148,7 +150,7 @@ end
 
 local tests_tmpl = [=[
 <p><b>Tests/Usage</b></p>
-<pre class="brush: lua; gutter: false">$test</pre>
+<pre class="code">$test</pre>
 ]=]
 
 local function create_tests_section (node, sputnik)
@@ -173,7 +175,7 @@ $do_tags[[
 ]]
 </p>
 <h3>Snippet</h3>
-<pre class="brush: lua; gutter: false">$code</pre>
+<pre class="code">$code</pre>
 $tests
 $required
 <p><b>Related Snippets</b></p>
@@ -186,6 +188,7 @@ $do_related[[
 <div>Revision $revision by $editor; created $date</div>
 $comments
 ]=]
+
 
 function actions.display_snippet(node, request, sputnik, info)
     local snippets = recipes.get_snippets(sputnik)
@@ -216,7 +219,7 @@ function actions.display_snippet(node, request, sputnik, info)
         comments = commentstr,
         error = not empty(node.error) and ('<h2 style="color:red">%s</h2> '):format(node.error) or '',
         description = node.markup.transform(node.description),
-        code = util.escape(node.content),
+        code = make_lua_pretty(node.content), --util.escape(node.content),
         author = node.author,
         licence = node.licence ,
         revision = info.version,

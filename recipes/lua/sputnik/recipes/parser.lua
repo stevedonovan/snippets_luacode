@@ -1,4 +1,5 @@
 local lexer = require 'sputnik.recipes.lexer'
+local util = require("sputnik.util")
 module ('sputnik.recipes.parser',package.seeall)
 
 local globals = {
@@ -217,8 +218,8 @@ function scan_lua_code (s)
         i = i + 1
     end
     return {
-        export_fun = set2list(export_fun),
-        export_mod = set2list(export_mod),
+        export_fun = set2list(export_fun)[1],
+        export_mod = set2list(export_mod)[1],
         require_map = requires,
         foreign_map = foreign,
         requires = set2list(requires),
@@ -226,3 +227,55 @@ function scan_lua_code (s)
     }
 end
 
+------ server-side code prettifier ----
+
+local function span(t,val)
+    return ('<span class="%s">%s</span>'):format(t,val)
+end
+
+local function link(ref,text)
+    return ('<a class="L" href="%s">%s</a>'):format(ref,text)
+end
+
+local rflag = false
+
+function make_lua_pretty(s, node)
+    local spans = {keyword=true,number=true,string=true,comment=true,prepro=true}
+    local res = {} 
+    for t,val in lexer.lua(s,{},{}) do
+        val = util.escape(val)    
+        if spans[t] then
+            val = span(t,val)
+        end
+        append(res,val)
+    end 
+    --[[
+    local export_fun = info.export_fun[1]
+    for t,val in lexer.lua(s,{},{}) do
+        val = util.escape(val)    
+        if t == 'iden' then
+            local ref
+            if val=="require" then
+                rflag = true                
+            elseif val==node.fun then
+                ref = ''
+            elseif index_of(node.imports,val) then
+                ref = ''
+            end
+            if ref then val = link(ref,val) end
+            append(res,val)
+        elseif spans[t] then
+            if t == 'string' and rflag then
+                local idx = index_of(node.requires,val)
+                if idx  then
+                    local ref = node.requires[idx]
+                end
+                rflag = false
+            else
+                append(res,span(t,val))
+            end
+        end
+    end
+    --]]
+    return table.concat(res,'')
+end

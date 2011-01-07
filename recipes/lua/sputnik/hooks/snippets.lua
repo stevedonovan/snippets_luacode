@@ -44,13 +44,13 @@ function save_snippet(node, request, sputnik)
        ---------------------- Exports ---------------------------------------------
        -- a snippet can either export a module, a single function or just be an example
        -- We do insist on any exported names being unique
-       if #scan.export_mod > 0 then
-            params.mod = scan.export_mod[1]
+       if scan.export_mod then
+            params.mod = scan.export_mod
             if not check_existing_snippets('mod',params.mod) then
                 err_msg = ("Module %s already used"):format(params.mod)
             end
-       elseif #scan.export_fun > 0 then
-            params.fun = scan.export_fun[1]
+       elseif scan.export_fun then
+            params.fun = scan.export_fun
             if not check_existing_snippets('fun',params.fun) then
                 err_msg = ("Function '%s' already used"):format(params.fun)
             end

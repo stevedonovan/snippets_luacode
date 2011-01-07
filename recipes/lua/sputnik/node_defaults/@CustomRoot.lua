@@ -224,12 +224,14 @@ NODE.html_menu      = [==[<ul class="level1">$do_nav_sections[=[
     </ul>
 ]==]
 
-NODE.html_logo      = [[<a class="home_page" href="$home_page_url" title="Home page">
+NODE.html_logo      = [[
+ <a class="home_page" href="$home_page_url" title="Home page">
       <p class="site_title">$site_title</p>
       <p class="site_subtitle">$site_subtitle</p>
      </a>]]
 
-NODE.html_page      = [=[<div id="breadcrumbs">
+NODE.html_page      = [=[
+ <div id="breadcrumbs">
      <ul>
       $do_breadcrumb[[<li class="first"><a $link>$title</a></li>]],[[
       <li class="follow"><a $link>▹&nbsp; $title</a></li>]]
@@ -255,7 +257,8 @@ NODE.html_page      = [=[<div id="breadcrumbs">
 NODE.html_content   = [[Not used by default.
 ]]
 
-NODE.html_body      = [[  <div id="container">
+NODE.html_body      = [[
+  <div id="container">
    <div id="header">
     $header
    </div>
@@ -296,42 +299,6 @@ NODE.html_sidebar = [==[
      </form>
     </div>
 
-    <div>
-    <h1><a href="" style="color:#000;">Software development</a></h5>
-          <ul>
-            <li><a href="">Build tools</a>       <span class="count" style="font-size:10px;color:#666">12</span></li>
-
-            <li><a href="">Code generators</a>   <span class="count" style="font-size:10px;color:#666">24</span></li>
-            <li><a href="">Compilers</a>         <span class="count" style="font-size:10px;color:#666">54</span></li>
-            <li><a href="">Debuggers</a>         <span class="count" style="font-size:10px;color:#666">32</span></li>
-            <li><a href="">Interpreters</a>      <span class="count" style="font-size:10px;color:#666">98</span></li>
-
-            <li><a href="">Object brokering</a>  <span class="count" style="font-size:10px;color:#666">102</span></li>
-            <li><a href="">Parsers</a>           <span class="count" style="font-size:10px;color:#666">30</span></li>
-            <li><a href="">Profilers</a>         <span class="count" style="font-size:10px;color:#666">8</span></li>
-            <li class="active" style="font-weight:bold">Testing tools         <span class="count" style="font-size:10px;color:#666">123</span></li>
-
-            <li><a href="">Version control</a>   <span class="count" style="font-size:10px;color:#666">2</span></li>
-          </ul>
-        </div>
-
-
-
-
-<script type="text/javascript" src="http://losr.org/js/twitter.min.js"></script>
-  <script type="text/javascript">
-    getTwitters('luanewsTweets', {
-        id: 'luanews', 
-        count: 3, 
-        withFriends: false,
-        enableLinks: true, 
-        ignoreReplies: true,
-        template: '<span class="twitterTime"><a href="http://twitter.com/%user_screen_name%/statuses/%id%">%time%</a></span> <span class="twitterStatus">%text%</span>'
-    });
-  </script>
-
-          <h1><a href="http://twitter.com/luanews" style="color:#000;">@luanews</a><img src="http://losr.org/img/twittie.png" style="vertical-align:top" alt="twitter" /></h1>
-          <div id="luanewsTweets"></div>
 ]==]
 
 NODE.html_footer = [===[

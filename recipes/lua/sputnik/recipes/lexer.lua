@@ -71,7 +71,7 @@ end
 
 local function lua_vdump(tok)
     if lua_keyword[tok] then
-        return  yield(tok,tok) --yield("keyword",tok)
+        return  yield("keyword",tok) -- wuz 'iden' ???
     else
         return yield("iden",tok)
     end
